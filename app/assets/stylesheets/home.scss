@@ -1,0 +1,81 @@
+// Place all the styles related to the Home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+// Source mixins
+.homepage-container {
+  overflow: hidden;
+  background-image: url(main.jpg);
+  background-size: cover;
+  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+}
+
+.homepage-title {
+  font-weight: 400 !important;
+}
+
+.homepage-welcome-text {
+  font-size: 1.25rem;
+  font-weight: 400 !important;
+}
+
+.login-modal {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 2rem;
+}
+
+.login-form {
+  max-width: 300px;
+  flex-direction: column;
+  padding: 5px 10px;
+  border: 2px solid gray;
+}
+
+.login-label {
+  width: 30%;
+  font-weight: 500 !important;
+}
+
+.login-input {
+  width: 65%;
+  margin-bottom: 5px;
+  padding: 5px;
+}
+
+.login-btn {
+  width: 150px;
+}
+
+.login-submit {
+  position: relative;
+  left: 15%;
+}
+
+@media (max-width: 768px) {
+  .login-form {
+    max-width: 100%;
+    flex-direction: column;
+    align-items: self-end;
+    justify-content: flex-end;
+    align-content: flex-end;
+    padding: 5px 10px;
+    border: 2px solid gray;
+  }
+
+  .login-label {
+    width: 90%;
+    margin-bottom: 5px;
+  }
+
+  .login-input {
+    width: 90%;
+  }
+
+  .login-submit {
+    position: inherit;
+    width: 150px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}

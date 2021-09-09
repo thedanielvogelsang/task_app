@@ -1,0 +1,4 @@
+{
+  // "rubocop-lsp.trace.server": "verbose",
+  "editor.formatOnSave": true
+}

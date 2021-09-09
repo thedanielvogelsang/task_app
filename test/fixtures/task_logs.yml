@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  task: one
+  user: one
+  duration_minutes: 9.99
+
+two:
+  task: two
+  user: two
+  duration_minutes: 9.99
