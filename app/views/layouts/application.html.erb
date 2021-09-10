@@ -9,12 +9,97 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+      var token = $('meta[name="csrf-token"]').attr('content');
+      const openModal = () => {
+        var form = document.getElementById('login-form')
+        form.style.visibility = 'visible'
+        var button = document.getElementById('login-btn')
+        button.style.display = 'none'
+      }
+      const deleteProject = (id) => {
+        fetch(`projects/${id}`, { 
+          method: 'DELETE',
+          headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' }
+        }).then(response => {
+          var pid = `project-${id}`
+          console.log("SUCCESSFUL DELETION", pid)
+          document.getElementById(pid).remove()
+        }).catch(error => { console.log("SOMETHING WENT WRONG") })
+      }
+      const updateProject = (e) => {
+        e.preventDefault();
+        var name = e.target.value
+        var id = e.target.id
+        var params = {
+          project: { name: name }
+        }
+        var updateBody = JSON.stringify(params)
+        console.log("ALL: ", [name, id, params])
+        fetch(`projects/${id}`, {
+          method: 'PUT',
+          headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' },
+          body: updateBody
+        }).then((response) => { 
+          return response.json();
+        }).then(r => console.log(r.project.name))
+        .catch(err => { console.log(err) })
+      }
+      const deleteCustomer = (id) => {
+        fetch(`customer/${id}`, { 
+          method: 'DELETE',
+          headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' }
+        }).then(response => {
+          console.log("SUCCESSFUL TASK DELETION", tid)
+          window.location.href("localhost:3000/projects")
+        }).catch(error => { console.log("SOMETHING WENT WRONG") })
+      }
+      const deleteTask = (id) => {
+        fetch(`tasks/${id}`, { 
+          method: 'DELETE',
+          headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' }
+        }).then(response => {
+          var tid = `task-${id}`
+          console.log("SUCCESSFUL TASK DELETION", tid)
+          document.getElementById(tid).remove()
+        }).catch(error => { console.log("SOMETHING WENT WRONG") })
+      }
+      const updateTask = (e) => {
+        e.preventDefault();
+        var desc = e.target.value
+        var id = e.target.id
+        var params = {
+          task: { description: desc }
+        }
+        var updateBody = JSON.stringify(params)
+        console.log("ALL: ", [name, id, params])
+        fetch(`http://localhost:3000/tasks/${id}`, {
+          method: 'PUT',
+          headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' },
+          body: updateBody
+        }).then((response) => { 
+          return response.json();
+        }).then(r => console.log(r.task.description))
+        .catch(err => { console.log(err) })
+      }
+    </script>
+    <script type="text/javascript">
+      $(document).ready(function(){
+        setTimeout(function(){
+          $('#flash').remove();
+        }, 5000);
+      })
+    </script>
   </head>
 
   <body>
-    <% if flash[:message] %>
-      <div class="notice"><%= flash[:message] %></div>
+    <%= content_tag :div, class: 'container' do %>
+      <% if logged_in? %>
+          <p>You are logged in as <%= current_user.email %></p>
+          <button type='submit' id='dash-btn' class='btn btn-secondary dash-btn' onclick="window.location.href='/logout'">Logout</button>
+      <% end %>
+      <%= yield %>
     <% end %>
-    <%= yield %>
   </body>
 </html>

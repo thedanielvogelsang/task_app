@@ -1,2 +1,21 @@
-<h1>Projects#index</h1>
-<p>Find me in app/views/projects/index.html.erb</p>
+<%= content_tag :div, '', class: 'project-page' do %>
+  <% if flash[:notice] %>
+    <p class='notice'><%= flash[:notice] %></p>
+  <% end %>
+  <h1 class='projects-title'>Current Projects</h1>
+  <%= content_tag :div, '', class: 'container projects' do %>
+    <ol type="I">
+    <% @projects.map do |p| %>
+      <li class='project-item' id="project-<%=p.id%>">
+        <%= content_tag :div, class: 'row project-row' do %>
+          <input id="<%= p.id %>" value="<%= p.name %>" onblur="updateProject(event)" class='project-name' />
+          <button type='button' onclick="window.location.href='/projects/<%= p.id %>'" class='project-show btn btn-success'>&#10003;</button>
+          <% if admin_privs? %>
+            <button type='button' onclick="deleteProject(<%=p.id%>)" class='project-delete btn btn-danger'>X</button>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+    </ol>
+  <% end %>
+<% end %>

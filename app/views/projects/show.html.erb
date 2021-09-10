@@ -1,2 +1,20 @@
-<h1>Projects#show</h1>
-<p>Find me in app/views/projects/show.html.erb</p>
+<h1><%= @project.name %></h1>
+<h3>Customer:
+  <%= link_to  @project.customer.name, customer_path(@project.customer.id) %>
+</h3>
+<br>
+<button type='button' onclick="window.location.href='/dashboard'" class='btn btn-primary'>Back to Dash</button>
+<hr>
+<%= content_tag :div, '', class: 'container project-tasks-container' do %>
+  <ol>
+  <% @tasks.map do |t| %>
+    <li class='task-item' id="task-<%=t.id%>">
+        <%= content_tag :div, class: 'row task-row' do %>
+          <input id="<%= t.id %>" value="<%= t.description %>" onblur="updateTask(event)" class='task-desc' />
+          <button type='button' onclick="window.location.href='/projects/<%= @project.id %>/tasks/<%= t.id %>'" class='task-show'>&#10003;</button>
+          <button type='button' onclick="deleteTask(<%=t.id%>)" class='task-delete'>X</button>
+        <% end %>
+      </li>
+  <% end %>
+  </ol>
+<% end %>

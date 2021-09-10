@@ -14,7 +14,9 @@
  *= require_self
  */
 
-
  .notice {
-   text-align: right;
+  font-size: 1.2rem;
+  color: red;
  }
+
+ 

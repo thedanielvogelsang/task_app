@@ -1,0 +1,27 @@
+<h1><%= @project.name %> Task:</h1>
+<h3>Description: <%= @task.description %></h3>
+<br>
+<button type='button' onclick="window.location.href='/projects/<%= @project.id %>'" class='btn btn-primary'>Back to Project</button>
+<hr>
+<%= content_tag :div, '', class: 'container task-container' do %>
+    <%= content_tag :div, class: 'col-md-7 mx-auto my-5 task-log-container' do %>
+      <h5> Log Work </h5>
+      <%= form_tag '/task_logs', class: 'task-log-form' do %>
+        <%= hidden_field_tag :task_id, @task.id %>
+        <%= label_tag(:email, 'Duration (in minutes)', class: 'login-label') %>
+        <%= number_field_tag(:duration_minutes, "", class:'login-input' )%><br/>
+        <%= submit_tag "Submit", class: 'btn btn-secondary task-log-submit' %>
+      <% end %>
+    <% end %>
+    <%= content_tag :div, class: 'task-logs col-md-6 mx-auto' do %>
+      <% if !@task_logs.empty? %>
+        <ol class='list-group list-group-numbered'>
+          <% @task_logs.map do |t| %>
+            <li class='list-group-item'><%= t.duration_minutes %> Mins on <%= t.created_at.strftime('%d/%m/%y') %> by <%= t.user.email %></li>
+          <% end %>
+        </ol>
+      <% else %>
+          <h3> NO TASK WORK LOGGED </h3>
+      <% end %>
+    <% end %>
+<% end %>

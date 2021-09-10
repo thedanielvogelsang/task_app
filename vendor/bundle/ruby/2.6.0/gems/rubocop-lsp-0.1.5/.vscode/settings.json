@@ -1,4 +1,5 @@
 {
   // "rubocop-lsp.trace.server": "verbose",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.minimap.enabled": false
 }

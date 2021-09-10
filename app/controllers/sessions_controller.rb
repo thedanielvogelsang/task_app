@@ -10,4 +10,10 @@ class SessionsController < ApplicationController
       redirect_to '/task_app'
     end
   end
+
+  def destroy
+    flash[:message] = 'Success'
+    session[:user_id] = nil
+    redirect_to root_path
+  end
 end

@@ -6,7 +6,7 @@
   overflow: hidden;
   background-image: url(main.jpg);
   background-size: cover;
-  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
 }
 
 .homepage-title {
@@ -21,7 +21,7 @@
 .login-modal {
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: center;
   margin-top: 2rem;
 }
 
@@ -56,9 +56,6 @@
   .login-form {
     max-width: 100%;
     flex-direction: column;
-    align-items: self-end;
-    justify-content: flex-end;
-    align-content: flex-end;
     padding: 5px 10px;
     border: 2px solid gray;
   }
@@ -78,4 +75,8 @@
     margin-top: 15px;
     margin-bottom: 15px;
   }
+}
+
+.hidden {
+  visibility: hidden;
 }

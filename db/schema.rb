@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 2021_09_09_192345) do
   create_table "user_authentications", force: :cascade do |t|
     t.bigint "user_id", null: false
     t.string "password_digest"
-    t.integer "login_count"
+    t.integer "login_count", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["user_id"], name: "index_user_authentications_on_user_id"

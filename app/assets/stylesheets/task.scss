@@ -3,24 +3,27 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 
-.project-row {
+.task-row {
   width: 100%;
   padding: 5px;
   margin-bottom: 5px;
 }
 
-.project-name {
+.task-desc {
   width: 50%;
   margin-right: 5px;
   margin-left: 10px;
 }
 
-.project-delete, .project-show {
+.task-show {
   width: 50px;
-  margin: 2px;
 }
 
-.project-item::marker {
+.task-delete {
+  width: 50px;
+}
+
+.task-item::marker {
   font: 1.5rem "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
   margin-right: 15px;
 }
