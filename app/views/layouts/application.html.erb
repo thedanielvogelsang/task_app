@@ -14,7 +14,7 @@
       var token = $('meta[name="csrf-token"]').attr('content');
       const openModal = () => {
         var form = document.getElementById('login-form')
-        form.style.visibility = 'visible'
+        form.classList.remove('invisible')
         var button = document.getElementById('login-btn')
         button.style.display = 'none'
       }
@@ -32,11 +32,11 @@
         e.preventDefault();
         var name = e.target.value
         var id = e.target.id
+        console.log("Updating: ", name, id)
         var params = {
           project: { name: name }
         }
         var updateBody = JSON.stringify(params)
-        console.log("ALL: ", [name, id, params])
         fetch(`projects/${id}`, {
           method: 'PUT',
           headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' },
@@ -113,8 +113,8 @@
   <body>
     <%= content_tag :div, class: 'container' do %>
       <% if logged_in? %>
-          <p>You are logged in as <%= current_user.email %></p>
-          <button type='submit' id='dash-btn' class='btn btn-secondary dash-btn' onclick="window.location.href='/logout'">Logout</button>
+          <p class='logged-in-prompt'>You are logged in as <%= current_user.email %></p>
+          <button type='submit' id='logout-btn' class='btn btn-secondary dash-btn' onclick="window.location.href='/logout'">Logout</button>
       <% end %>
       <%= yield %>
     <% end %>

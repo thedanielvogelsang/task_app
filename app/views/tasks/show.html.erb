@@ -1,5 +1,11 @@
 <h1><%= @project.name %> Task:</h1>
-<h3>Description: <%= @task.description %></h3>
+<h3>Description: 
+     <% if !admin_privs? %>
+      <input id="<%= @taskid %>" value="<%= @task.description %>" class='task-description' readonly >
+    <%else%>
+      <input id="<%= @task.id %>" value="<%= @task.description %>" onblur="updateTask(event)" class='task-description' />
+    <%end%>
+</h3>
 <br>
 <button type='button' onclick="window.location.href='/projects/<%= @project.id %>'" class='btn btn-primary'>Back to Project</button>
 <hr>

@@ -32,6 +32,6 @@ class TasksController < ApplicationController
   private
 
   def safe_params
-    params.permit(:description, :project_id)
+    params.require(:task).permit(:description, :project_id)
   end
 end

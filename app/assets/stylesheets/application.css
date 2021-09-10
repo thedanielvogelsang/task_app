@@ -19,4 +19,10 @@
   color: red;
  }
 
- 
+ .logged-in-prompt {
+   padding-top: 10px;
+ }
+
+ .logout-btn {
+   margin-bottom: 15px;
+ }
