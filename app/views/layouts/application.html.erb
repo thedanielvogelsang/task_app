@@ -47,12 +47,12 @@
         .catch(err => { console.log(err) })
       }
       const deleteCustomer = (id) => {
-        fetch(`customer/${id}`, { 
+        fetch(`/customers/${id}`, { 
           method: 'DELETE',
           headers: { 'X-CSRF-Token': token, 'Content-Type': 'application/json' }
         }).then(response => {
-          console.log("SUCCESSFUL TASK DELETION", tid)
-          window.location.href("localhost:3000/projects")
+          console.log("SUCCESSFUL CUSTOMER DELETION", id)
+          window.location.href = "http://localhost:3000/projects"
         }).catch(error => { console.log("SOMETHING WENT WRONG") })
       }
       const deleteTask = (id) => {
@@ -82,6 +82,23 @@
           return response.json();
         }).then(r => console.log(r.task.description))
         .catch(err => { console.log(err) })
+      }
+      const openTaskForm = () => {
+        var formContainer = document.getElementById('task-form-container')
+        formContainer.style.display = 'flex'
+        var form = document.getElementById('task-form')
+        form.style.display = 'flex'
+        form.style.width = '500px'
+        form.style.flexDirection = 'column'
+        form.style.padding = '5px 10px'
+        form.style.border = '2px solid gray'
+        form.style.alignItems = 'center'
+
+        document.getElementById('open-task-form').style.display = 'none'
+      }
+      const closeTaskForm = () => {
+        document.getElementById('task-form-container').style.display = 'none'
+        document.getElementById('open-task-form').style.display = 'block'
       }
     </script>
     <script type="text/javascript">

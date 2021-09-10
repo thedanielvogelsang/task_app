@@ -5,14 +5,30 @@
 <br>
 <button type='button' onclick="window.location.href='/dashboard'" class='btn btn-primary'>Back to Dash</button>
 <hr>
+<button type='submit' id='open-task-form' class='btn btn-primary dash-btn' onclick="openTaskForm()">Create new Task</button>
 <%= content_tag :div, '', class: 'container project-tasks-container' do %>
+  <%= content_tag :div, id: 'task-form-container', class: 'col-md-7 mx-auto my-5 task-form-container hidden' do %>
+    <%= form_tag '/tasks', id: 'task-form' do %>
+      <%= content_tag :button, 'X', id: 'close-task', class: 'close-task-form', onclick: 'closeTaskForm()', type: 'button' %>
+      <%= hidden_field_tag :project_id, @project.id %>
+      <%= label_tag(:description, 'Task Description', class: 'task-label') %>
+      <%= text_field_tag(:description, "", class:'task-desc-input' )%>
+      <%= submit_tag "Submit", class: 'btn btn-secondary' %>
+    <% end %>
+  <% end %>
   <ol>
   <% @tasks.map do |t| %>
     <li class='task-item' id="task-<%=t.id%>">
         <%= content_tag :div, class: 'row task-row' do %>
-          <input id="<%= t.id %>" value="<%= t.description %>" onblur="updateTask(event)" class='task-desc' />
-          <button type='button' onclick="window.location.href='/projects/<%= @project.id %>/tasks/<%= t.id %>'" class='task-show'>&#10003;</button>
-          <button type='button' onclick="deleteTask(<%=t.id%>)" class='task-delete'>X</button>
+          <% if !admin_privs? %>
+            <input id="<%= t.id %>" value="<%= t.description %>" class='task-desc' readonly >
+          <%else%>
+            <input id="<%= t.id %>" value="<%= t.description %>" onblur="updateTask(event)" class='task-desc' />
+          <%end%>
+          <button type='button' onclick="window.location.href='/projects/<%= @project.id %>/tasks/<%= t.id %>'" class='task-show btn btn-success'>&#10003;</button>
+          <% if admin_privs? %>
+            <button type='button' onclick="deleteTask(<%=t.id%>)" class='task-delete btn btn-danger'>X</button>
+          <% end %>
         <% end %>
       </li>
   <% end %>

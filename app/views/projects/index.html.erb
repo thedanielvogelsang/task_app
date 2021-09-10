@@ -8,7 +8,11 @@
     <% @projects.map do |p| %>
       <li class='project-item' id="project-<%=p.id%>">
         <%= content_tag :div, class: 'row project-row' do %>
-          <input id="<%= p.id %>" value="<%= p.name %>" onblur="updateProject(event)" class='project-name' />
+          <% if !admin_privs? %>
+            <input type='text' id="<%= p.id %>" value="<%= p.name %>" class='project-name' readonly >
+          <%else%>
+            <input type='text' id="<%= p.id %>" value="<%= p.name %>" onblur="updateProject(event)" class='project-name' >
+          <%end%>
           <button type='button' onclick="window.location.href='/projects/<%= p.id %>'" class='project-show btn btn-success'>&#10003;</button>
           <% if admin_privs? %>
             <button type='button' onclick="deleteProject(<%=p.id%>)" class='project-delete btn btn-danger'>X</button>

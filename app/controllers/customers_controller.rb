@@ -16,6 +16,7 @@ class CustomersController < ApplicationController
   end
 
   def destroy
+    flash[:notice] = 'Successful deletion'
     render json: { message: 'Success!' }, status: 200
   end
 

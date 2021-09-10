@@ -13,7 +13,7 @@
         <%= content_tag :p, 'Hello! And welcome to Task App, your portal for logging those busy work hours.', class: 'homepage-welcome-text' %>
         <button type='submit' id='login-btn' class='btn btn-primary login-btn' onclick='openModal()'>Login</button>
         <%= content_tag :div, class: 'container-sm login-modal' do %>
-          <%= form_tag '/login', id: 'login-form', class: 'login-form hidden' do %>
+          <%= form_tag '/login', id: 'login-form', class: 'login-form invisible' do %>
             <%= label_tag(:email, 'Email', class: 'login-label') %>
             <%= text_field_tag(:email, "", class:'login-input' )%><br/>
             <%= label_tag(:password, 'Password', class: 'login-label') %>

@@ -6,6 +6,16 @@ class TasksController < ApplicationController
     render 'tasks/show'
   end
 
+  def create
+    task = Task.new(safe_params)
+    if task.save
+      flash[:notice] = 'Success!'
+      redirect_back fallback_location: dashboard_path
+    else
+      render json: { errors: task.errors.full_messages }, status: 404
+    end
+  end
+
   def update
     task = Task.find_by(id: params[:id])
     if task && task.update(safe_params)
@@ -22,6 +32,6 @@ class TasksController < ApplicationController
   private
 
   def safe_params
-    params.require(:task).permit(:description)
+    params.permit(:description, :project_id)
   end
 end

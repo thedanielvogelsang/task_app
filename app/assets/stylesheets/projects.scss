@@ -24,3 +24,26 @@
   font: 1.5rem "Segoe UI","Roboto","Helvetica Neue",Arial,sans-serif;
   margin-right: 15px;
 }
+
+.task-label {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 500 !important;
+}
+
+.close-task-form {
+  position: relative;
+  left: 45%;
+  border-radius: 5px;
+}
+
+.task-desc-input {
+  width: 65%;
+  margin: 5px;
+  padding: 5px;
+}
+
+.hidden {
+  display: none;
+}
